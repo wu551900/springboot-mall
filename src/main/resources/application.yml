@@ -6,3 +6,6 @@ spring:
     password: springboot
   jpa:
     show-sql: true
+  jackson:
+    time-zone: GMT+8 #時區設置
+    date-format: yyyy-MM-dd HH:mm:ss #時間格式
