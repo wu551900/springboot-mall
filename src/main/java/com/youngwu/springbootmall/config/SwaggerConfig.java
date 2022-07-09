@@ -16,7 +16,7 @@ public class SwaggerConfig {
     @Value("${springfox.documentation.swagger-ui.enabled}")
     Boolean swaggerEnabled;
 
-    public Docket docket(){
+    public Docket docket() {
         return new Docket(DocumentationType.OAS_30)
                 //是否開啟swagger
                 .enable(swaggerEnabled)

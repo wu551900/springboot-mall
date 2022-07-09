@@ -3,6 +3,8 @@ package com.youngwu.springbootmall.controller;
 
 import com.youngwu.springbootmall.dto.CreateProductRequest;
 import com.youngwu.springbootmall.dto.CreateProductResponse;
+import com.youngwu.springbootmall.dto.UpdateProductRequest;
+import com.youngwu.springbootmall.dto.UpdateProductResponse;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.service.ProductService;
 import io.swagger.annotations.Api;
@@ -27,9 +29,9 @@ public class ProductController {
         Product product = productService.getProductById(productId);
 
 
-        if(product!=null){
+        if (product != null) {
             return ResponseEntity.status(HttpStatus.OK).body(product);
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
@@ -38,6 +40,12 @@ public class ProductController {
     @PostMapping("/products")
     public CreateProductResponse createProduct(@RequestBody @Valid CreateProductRequest request) {
         return productService.createProduct(request);
+    }
+
+    @ApiOperation("修改產品")
+    @PostMapping("/updateProducts")
+    public UpdateProductResponse updateProduct(@RequestBody @Valid UpdateProductRequest request) {
+        return productService.updateProduct(request);
     }
 
 

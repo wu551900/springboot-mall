@@ -1,21 +1,24 @@
 package com.youngwu.springbootmall.dto;
 
 import com.youngwu.springbootmall.constant.ProductCategory;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
 @Data
-public class CreateProductRequest {
+public class UpdateProductRequest {
+
+    @NotNull
+    @ApiModelProperty(value = "產品ID", required = true)
+    private String productId;
 
     @NotNull
     @ApiModelProperty(value = "產品名稱", required = true)
     private String productName;
 
     @NotNull
-    @ApiModelProperty(value = "產品類別", required = true, example = "FOOD, CAR, E_BOOK")
+    @ApiModelProperty(value = "產品類別", required = true)
     private ProductCategory category;
 
     @NotNull
@@ -32,4 +35,6 @@ public class CreateProductRequest {
 
     @ApiModelProperty(value = "產品敘述")
     private String description;
+
+
 }

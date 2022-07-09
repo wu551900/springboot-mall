@@ -6,8 +6,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreateProductResponse {
-
+public class UpdateProductResponse {
     @ApiModelProperty(value = "回傳狀態", required = true)
     String status;
 }
