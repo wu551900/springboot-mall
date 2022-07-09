@@ -9,3 +9,7 @@ spring:
   jackson:
     time-zone: GMT+8 #時區設置
     date-format: yyyy-MM-dd HH:mm:ss #時間格式
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true

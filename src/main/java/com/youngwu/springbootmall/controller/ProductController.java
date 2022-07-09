@@ -5,6 +5,8 @@ import com.youngwu.springbootmall.dto.CreateProductRequest;
 import com.youngwu.springbootmall.dto.CreateProductResponse;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.service.ProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Api(value = "ProductController", tags = {"ProductController"})
 @RestController
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
+    @ApiOperation("查詢產品")
     @GetMapping("/products/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId) {
         Product product = productService.getProductById(productId);
@@ -30,8 +34,11 @@ public class ProductController {
         }
     }
 
+    @ApiOperation("新增產品")
     @PostMapping("/products")
     public CreateProductResponse createProduct(@RequestBody @Valid CreateProductRequest request) {
         return productService.createProduct(request);
     }
+
+
 }
