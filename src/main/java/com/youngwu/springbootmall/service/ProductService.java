@@ -1,9 +1,6 @@
 package com.youngwu.springbootmall.service;
 
-import com.youngwu.springbootmall.dto.CreateProductRequest;
-import com.youngwu.springbootmall.dto.CreateProductResponse;
-import com.youngwu.springbootmall.dto.UpdateProductRequest;
-import com.youngwu.springbootmall.dto.UpdateProductResponse;
+import com.youngwu.springbootmall.dto.*;
 import com.youngwu.springbootmall.model.Product;
 
 public interface ProductService {
@@ -13,4 +10,6 @@ public interface ProductService {
     CreateProductResponse createProduct(CreateProductRequest request);
 
     UpdateProductResponse updateProduct(UpdateProductRequest request);
+
+    DeleteProductResponse deleteProduct(DeleteProductRequest request);
 }

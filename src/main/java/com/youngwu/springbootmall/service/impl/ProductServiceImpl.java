@@ -1,10 +1,7 @@
 package com.youngwu.springbootmall.service.impl;
 
 import com.youngwu.springbootmall.constant.ProductCategory;
-import com.youngwu.springbootmall.dto.CreateProductRequest;
-import com.youngwu.springbootmall.dto.CreateProductResponse;
-import com.youngwu.springbootmall.dto.UpdateProductRequest;
-import com.youngwu.springbootmall.dto.UpdateProductResponse;
+import com.youngwu.springbootmall.dto.*;
 import com.youngwu.springbootmall.repository.ProductRepository;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.service.ProductService;
@@ -28,8 +25,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public CreateProductResponse createProduct(CreateProductRequest request) {
-        Product product = new Product();
 
+        Product product = new Product();
         setProductInfo(product, request.getProductName(), request.getCategory(), request.getImageUrl(), request.getPrice(), request.getStock(), request.getDescription());
 
         Date now = new Date();
@@ -62,6 +59,22 @@ public class ProductServiceImpl implements ProductService {
             response.setStatus("Update Success");
         } else {
             response.setStatus("Update failed");
+        }
+        return response;
+    }
+
+    @Override
+    public DeleteProductResponse deleteProduct(DeleteProductRequest request) {
+
+        Optional<Product> productOptional = productRepository.findById(Integer.valueOf(request.getProductId()));
+
+        DeleteProductResponse response = new DeleteProductResponse();
+
+        if(!productOptional.isEmpty()){
+            productRepository.deleteById(Integer.valueOf(request.getProductId()));
+            response.setStatus("Delete Success");
+        } else {
+            response.setStatus("Delete failed");
         }
         return response;
     }
