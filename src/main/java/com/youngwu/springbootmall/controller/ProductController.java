@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(value = "ProductController", tags = {"ProductController"})
 @RestController
@@ -19,6 +20,12 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @ApiOperation("查詢產品列表")
+    @GetMapping("/products")
+    public List<Product> getProducts() {
+        return productService.getProducts();
+    }
 
     @ApiOperation("查詢產品")
     @GetMapping("/products/{productId}")
