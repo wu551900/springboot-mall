@@ -2,8 +2,8 @@ package com.youngwu.springbootmall.service.impl;
 
 import com.youngwu.springbootmall.constant.ProductCategory;
 import com.youngwu.springbootmall.dto.*;
-import com.youngwu.springbootmall.repository.ProductRepository;
 import com.youngwu.springbootmall.model.Product;
+import com.youngwu.springbootmall.repository.ProductRepository;
 import com.youngwu.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,21 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        ProductCategory category = productQueryParams.getCategory();
+        String search = productQueryParams.getSearch();
+
+        if (category != null && search != null) {
+            return productRepository.findByCategoryAndProductNameContaining(category, search);
+        }
+
+        if (category != null) {
+            return productRepository.findByCategory(category);
+        }
+
+        if (search != null) {
+            return productRepository.findByProductNameContaining(search);
+        }
         return productRepository.findAll();
     }
 
@@ -76,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
 
         DeleteProductResponse response = new DeleteProductResponse();
 
-        if(!productOptional.isEmpty()){
+        if (!productOptional.isEmpty()) {
             productRepository.deleteById(Integer.valueOf(request.getProductId()));
             response.setStatus("Delete Success");
         } else {

@@ -1,6 +1,7 @@
 package com.youngwu.springbootmall.controller;
 
 
+import com.youngwu.springbootmall.constant.ProductCategory;
 import com.youngwu.springbootmall.dto.*;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.service.ProductService;
@@ -23,8 +24,16 @@ public class ProductController {
 
     @ApiOperation("查詢產品列表")
     @GetMapping("/products")
-    public List<Product> getProducts() {
-        return productService.getProducts();
+    public List<Product> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+    ) {
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+
+        return productService.getProducts(productQueryParams);
     }
 
     @ApiOperation("查詢產品")
