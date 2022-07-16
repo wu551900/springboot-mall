@@ -1,11 +1,13 @@
 package com.youngwu.springbootmall.service.impl;
 
+import com.youngwu.springbootmall.constant.OrderByColumn;
 import com.youngwu.springbootmall.constant.ProductCategory;
 import com.youngwu.springbootmall.dto.*;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.repository.ProductRepository;
 import com.youngwu.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -24,18 +26,27 @@ public class ProductServiceImpl implements ProductService {
         ProductCategory category = productQueryParams.getCategory();
         String search = productQueryParams.getSearch();
 
+        String orderBy = productQueryParams.getOrderBy().name();
+        String sort = productQueryParams.getSort();
+
+        Sort sortBy = Sort.by(orderBy).descending();
+        String asc = "asc";
+        if (asc.equals(sort)) {
+            sortBy = Sort.by(orderBy).ascending();
+        }
+
         if (category != null && search != null) {
-            return productRepository.findByCategoryAndProductNameContaining(category, search);
+            return productRepository.findByCategoryAndProductNameContaining(category, search, sortBy);
         }
 
         if (category != null) {
-            return productRepository.findByCategory(category);
+            return productRepository.findByCategory(category, sortBy);
         }
 
         if (search != null) {
-            return productRepository.findByProductNameContaining(search);
+            return productRepository.findByProductNameContaining(search, sortBy);
         }
-        return productRepository.findAll();
+        return productRepository.findAll(Sort.by("createdDate").descending());
     }
 
     @Override

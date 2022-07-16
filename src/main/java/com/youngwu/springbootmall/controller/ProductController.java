@@ -1,6 +1,7 @@
 package com.youngwu.springbootmall.controller;
 
 
+import com.youngwu.springbootmall.constant.OrderByColumn;
 import com.youngwu.springbootmall.constant.ProductCategory;
 import com.youngwu.springbootmall.dto.*;
 import com.youngwu.springbootmall.model.Product;
@@ -25,12 +26,19 @@ public class ProductController {
     @ApiOperation("查詢產品列表")
     @GetMapping("/products")
     public List<Product> getProducts(
+            // 查詢條件 Filtering
             @RequestParam(required = false) ProductCategory category,
-            @RequestParam(required = false) String search
+            @RequestParam(required = false) String search,
+
+            // 排序 Sorting
+            @RequestParam(defaultValue = "createdDate") OrderByColumn orderBy,
+            @RequestParam(defaultValue = "desc") String sort
     ) {
         ProductQueryParams productQueryParams = new ProductQueryParams();
         productQueryParams.setCategory(category);
         productQueryParams.setSearch(search);
+        productQueryParams.setOrderBy(orderBy);
+        productQueryParams.setSort(sort);
 
 
         return productService.getProducts(productQueryParams);
