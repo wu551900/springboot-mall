@@ -11,11 +11,15 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
+@Validated
 @Api(value = "ProductController", tags = {"ProductController"})
 @RestController
 public class ProductController {
@@ -32,13 +36,19 @@ public class ProductController {
 
             // 排序 Sorting
             @RequestParam(defaultValue = "createdDate") OrderByColumn orderBy,
-            @RequestParam(defaultValue = "desc") String sort
+            @RequestParam(defaultValue = "desc") String sort,
+
+            //分頁
+            @RequestParam(defaultValue = "0") @Min(0) @Max(50) Integer page,
+            @RequestParam(defaultValue = "24") @Min(1) @Max(40) Integer pageSize
     ) {
         ProductQueryParams productQueryParams = new ProductQueryParams();
         productQueryParams.setCategory(category);
         productQueryParams.setSearch(search);
         productQueryParams.setOrderBy(orderBy);
         productQueryParams.setSort(sort);
+        productQueryParams.setPage(page);
+        productQueryParams.setPageSize(pageSize);
 
 
         return productService.getProducts(productQueryParams);

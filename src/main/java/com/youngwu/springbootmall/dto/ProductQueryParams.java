@@ -20,4 +20,8 @@ public class ProductQueryParams {
     private OrderByColumn orderBy;
 
     private String sort;
+
+    private Integer page;
+
+    private Integer pageSize;
 }

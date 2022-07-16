@@ -1,12 +1,13 @@
 package com.youngwu.springbootmall.service.impl;
 
-import com.youngwu.springbootmall.constant.OrderByColumn;
 import com.youngwu.springbootmall.constant.ProductCategory;
 import com.youngwu.springbootmall.dto.*;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.repository.ProductRepository;
 import com.youngwu.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
@@ -29,24 +30,29 @@ public class ProductServiceImpl implements ProductService {
         String orderBy = productQueryParams.getOrderBy().name();
         String sort = productQueryParams.getSort();
 
+        int page = productQueryParams.getPage();
+        int pageSize = productQueryParams.getPageSize();
+
         Sort sortBy = Sort.by(orderBy).descending();
         String asc = "asc";
         if (asc.equals(sort)) {
             sortBy = Sort.by(orderBy).ascending();
         }
 
+        Pageable pageable = PageRequest.of(page, pageSize, sortBy);
+
         if (category != null && search != null) {
-            return productRepository.findByCategoryAndProductNameContaining(category, search, sortBy);
+            return productRepository.findByCategoryAndProductNameContaining(category, search, pageable);
         }
 
         if (category != null) {
-            return productRepository.findByCategory(category, sortBy);
+            return productRepository.findByCategory(category, pageable);
         }
 
         if (search != null) {
-            return productRepository.findByProductNameContaining(search, sortBy);
+            return productRepository.findByProductNameContaining(search, pageable);
         }
-        return productRepository.findAll(Sort.by("createdDate").descending());
+        return productRepository.findAll(pageable).getContent();
     }
 
     @Override
