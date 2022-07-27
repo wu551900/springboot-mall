@@ -1,7 +1,7 @@
 package com.youngwu.springbootmall.service.impl;
 
 import com.youngwu.springbootmall.constant.ProductCategory;
-import com.youngwu.springbootmall.dto.*;
+import com.youngwu.springbootmall.dto.product.*;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.repository.ProductRepository;
 import com.youngwu.springbootmall.service.ProductService;

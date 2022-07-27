@@ -1,6 +1,6 @@
 package com.youngwu.springbootmall.service;
 
-import com.youngwu.springbootmall.dto.*;
+import com.youngwu.springbootmall.dto.product.*;
 import com.youngwu.springbootmall.model.Product;
 
 import java.util.List;

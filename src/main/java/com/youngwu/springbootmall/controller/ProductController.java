@@ -3,7 +3,7 @@ package com.youngwu.springbootmall.controller;
 
 import com.youngwu.springbootmall.constant.OrderByColumn;
 import com.youngwu.springbootmall.constant.ProductCategory;
-import com.youngwu.springbootmall.dto.*;
+import com.youngwu.springbootmall.dto.product.*;
 import com.youngwu.springbootmall.model.Product;
 import com.youngwu.springbootmall.service.ProductService;
 import io.swagger.annotations.Api;
@@ -20,7 +20,7 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @Validated
-@Api(value = "ProductController", tags = {"ProductController"})
+@Api(value = "產品功能", tags = {"產品功能"})
 @RestController
 public class ProductController {
 

@@ -1,4 +1,4 @@
-package com.youngwu.springbootmall.dto;
+package com.youngwu.springbootmall.dto.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DeleteProductResponse {
-    @ApiModelProperty(value = "回傳狀態", required = true)
-    String status;
+public class DeleteProductRequest {
+    @ApiModelProperty(value = "產品ID", required = true)
+    private String productId;
 }

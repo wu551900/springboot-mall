@@ -1,4 +1,4 @@
-package com.youngwu.springbootmall.dto;
+package com.youngwu.springbootmall.dto.product;
 
 import com.youngwu.springbootmall.constant.ProductCategory;
 import io.swagger.annotations.ApiModel;

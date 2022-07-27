@@ -1,4 +1,4 @@
-package com.youngwu.springbootmall.dto;
+package com.youngwu.springbootmall.dto.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
